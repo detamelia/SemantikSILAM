@@ -1,0 +1,72 @@
+@prefix : <http://example.org/ontology/mahasiswa#> .
+@prefix mhs: <http://example.org/ontology/mahasiswa#> .
+@prefix res: <http://example.org/resource/mahasiswa/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ==============================================================================
+# ONTOLOGI DATA MAHASISWA (SISTEM A)
+# Proyek UTS Semantic Web: Sistem Informasi Mahasiswa Terintegrasi
+# ==============================================================================
+
+<http://example.org/ontology/mahasiswa>
+    a owl:Ontology ;
+    rdfs:label "Ontologi Data Mahasiswa Terintegrasi" ;
+    rdfs:comment "Ontologi untuk memodelkan data master mahasiswa pada Sistem A dan dihubungkan ke Sistem B." ;
+    owl:versionInfo "1.0.0" .
+
+# ==============================================================================
+# DEFINISI KELAS (CLASSES)
+# ==============================================================================
+
+mhs:Mahasiswa
+    a owl:Class ;
+    rdfs:label "Mahasiswa" ;
+    rdfs:comment "Individu yang terdaftar sebagai mahasiswa aktif pada institusi pendidikan." .
+
+mhs:ProgramStudi
+    a owl:Class ;
+    rdfs:label "Program Studi" ;
+    rdfs:comment "Program studi atau departemen akademik tempat mahasiswa menempuh pendidikan." .
+
+# ==============================================================================
+# DEFINISI PROPERTI DATA (DATATYPE PROPERTIES)
+# ==============================================================================
+
+mhs:npm
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain mhs:Mahasiswa ;
+    rdfs:range xsd:string ;
+    rdfs:label "Nomor Pokok Mahasiswa" ;
+    rdfs:comment "Identitas pembeda unik resmi bagi setiap mahasiswa (Unique Identifier)." .
+
+mhs:namaMahasiswa
+    a owl:DatatypeProperty ;
+    rdfs:domain mhs:Mahasiswa ;
+    rdfs:range xsd:string ;
+    rdfs:label "Nama Lengkap Mahasiswa" ;
+    rdfs:comment "Nama lengkap resmi mahasiswa sesuai kartu identitas." .
+
+mhs:programStudi
+    a owl:DatatypeProperty ;
+    rdfs:domain mhs:Mahasiswa ;
+    rdfs:range xsd:string ;
+    rdfs:label "Nama Program Studi" ;
+    rdfs:comment "Nama program studi yang sedang ditempuh." .
+
+mhs:angkatan
+    a owl:DatatypeProperty ;
+    rdfs:domain mhs:Mahasiswa ;
+    rdfs:range xsd:gYear ;
+    rdfs:label "Tahun Angkatan" ;
+    rdfs:comment "Tahun kalender pertama kali mahasiswa terdaftar." .
+
+# ==============================================================================
+# PRINSIP PRIVASI DATA DALAM ONTOLOGI
+# ==============================================================================
+# Catatan penting: Atribut sensitif seperti nama ibu (mhs:namaIbuKandung) dan
+# tanggal lahir lengkap (mhs:tanggalLahirAsli) TIDAK dipublikasikan dalam
+# graph publik maupun integrasi antarsistem sesuai prinsip data minimization.
+# ==============================================================================
