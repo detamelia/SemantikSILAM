@@ -18,7 +18,7 @@ class MahasiswaTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('SI Data Mahasiswa');
+        $response->assertSee('Portal Mahasiswa');
         $response->assertSee('Dashboard');
     }
 

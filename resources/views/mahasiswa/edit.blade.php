@@ -115,7 +115,7 @@
                                 value="{{ old('tanggal_lahir', $mahasiswa->tanggal_lahir ? $mahasiswa->tanggal_lahir->format('Y-m-d') : '') }}"
                                 required
                             >
-                            <div class="form-hint">Disimpan asli, namun pada tampilan publik disamarkan ke tanggal 1.</div>
+                            <div class="form-hint">Tanggal lahir mahasiswa sesuai dokumen resmi.</div>
                             @error('tanggal_lahir')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
@@ -134,7 +134,7 @@
                                 value="{{ old('nama_ibu', $mahasiswa->nama_ibu) }}"
                                 required
                             >
-                            <div class="form-hint">Akan otomatis dienkripsi ulang dengan Laravel Encryption.</div>
+                            <div class="form-hint">Data keluarga disimpan secara aman dan terenkripsi.</div>
                             @error('nama_ibu')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
@@ -145,7 +145,7 @@
                         <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}" class="btn btn-secondary">Batal</a>
                         <button type="submit" class="btn btn-primary">
                             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                            Perbarui Data
+                            Simpan Perubahan
                         </button>
                     </div>
                 </form>
@@ -155,14 +155,14 @@
         <!-- Info Tambahan -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title" style="font-size: 1rem;">Status Data</div>
+                <div class="card-title" style="font-size: 1rem;">Informasi Sinkronisasi</div>
             </div>
             <div class="card-body" style="font-size: 0.88rem;">
                 <p style="color: var(--gray-text-sub); margin-bottom: 12px;">
-                    Perubahan data pada Sistem A akan langsung berdampak pada hasil query REST API yang diakses oleh Sistem B.
+                    Pembaruan data mahasiswa ini akan langsung diperbarui pada pangkalan data dan endpoint layanan verifikasi.
                 </p>
                 <div style="background: #f8fafc; border: 1px solid var(--gray-border); padding: 10px; border-radius: 8px;">
-                    <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-text-sub); font-weight: 700;">Subject URI Semantik:</div>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-text-sub); font-weight: 700;">Subject URI:</div>
                     <code style="font-size: 0.82rem; color: var(--primary); word-break: break-all;">{{ $mahasiswa->semantic_uri }}</code>
                 </div>
             </div>

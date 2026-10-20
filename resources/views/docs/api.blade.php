@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Dokumentasi REST API & Semantic Web - Sistem A')
+@section('title', 'Dokumentasi Integrasi API - Portal Mahasiswa')
 
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Dokumentasi REST API & Pemodelan Semantic Web</h1>
-            <p class="page-description">Spesifikasi teknis integrasi Sistem A dengan Sistem B serta skema ontologi RDF/OWL.</p>
+            <h1 class="page-title">Dokumentasi Integrasi API</h1>
+            <p class="page-description">Spesifikasi teknis endpoint layanan data mahasiswa dan skema ontologi.</p>
         </div>
         <div>
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">
@@ -20,13 +20,13 @@
         <div class="card-header" style="background: var(--primary-light);">
             <div class="card-title" style="color: var(--primary); display: flex; align-items: center; gap: 8px;">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                Pengujian Interaktif REST API (Live API Tester)
+                Uji Coba Endpoint
             </div>
-            <span class="pill-badge" style="background: #fff; color: var(--primary); font-weight: 700;">Lokal</span>
+            <span class="pill-badge" style="background: #fff; color: var(--primary); font-weight: 600;">Lokal</span>
         </div>
         <div class="card-body">
             <p style="font-size: 0.9rem; color: var(--gray-text-sub); margin-bottom: 1rem;">
-                Gunakan form di bawah ini untuk menguji respons REST API yang akan dipanggil oleh <strong>Sistem B</strong>.
+                Uji langsung respons JSON atau RDF yang dikembalikan oleh endpoint verifikasi mahasiswa.
             </p>
 
             <div style="display: flex; gap: 10px; max-width: 600px; margin-bottom: 1rem;">

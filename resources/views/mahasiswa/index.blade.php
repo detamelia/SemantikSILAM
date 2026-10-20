@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Mahasiswa - Sistem A')
+@section('title', 'Daftar Mahasiswa - Portal Mahasiswa')
 
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Daftar Mahasiswa</h1>
-            <p class="page-description">Kelola data master mahasiswa, enkripsi data pribadi, dan identitas unik NPM.</p>
+            <h1 class="page-title">Pangkalan Data Mahasiswa</h1>
+            <p class="page-description">Kelola informasi data induk mahasiswa, verifikasi identitas, dan administrasi akademik.</p>
         </div>
-        <div>
+        <div style="display: flex; gap: 10px;">
+            <a href="{{ route('prodi.index') }}" class="btn btn-secondary">
+                Direktori Prodi
+            </a>
             <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                 Tambah Mahasiswa
             </a>
         </div>
@@ -41,7 +44,7 @@
             </div>
 
             <button type="submit" class="btn btn-secondary">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 Cari
             </button>
 
@@ -64,28 +67,38 @@
                 <thead>
                     <tr>
                         <th style="width: 50px;">No</th>
-                        <th>NPM (ID Unik)</th>
-                        <th>Nama Lengkap</th>
+                        <th>Mahasiswa</th>
+                        <th>NPM</th>
                         <th>Program Studi</th>
                         <th>Angkatan</th>
-                        <th>Tanggal Lahir (Disamarkan)</th>
-                        <th>Data Sensitif</th>
-                        <th style="text-align: right; width: 170px;">Aksi</th>
+                        <th>Tanggal Lahir</th>
+                        <th style="text-align: right; width: 140px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($mahasiswas as $index => $mhs)
+                        @php
+                            $colorIdx = ($mahasiswas->firstItem() + $index) % 6;
+                            $inisial = strtoupper(substr($mhs->nama, 0, 1));
+                        @endphp
                         <tr>
                             <td style="color: var(--gray-text-sub);">
                                 {{ $mahasiswas->firstItem() + $index }}
                             </td>
                             <td>
-                                <span class="npm-badge">{{ $mhs->npm }}</span>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="mhs-avatar avatar-color-{{ $colorIdx }}">
+                                        {{ $inisial }}
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('mahasiswa.show', $mhs->id) }}" style="font-weight: 600; color: var(--dark);">
+                                            {{ $mhs->nama }}
+                                        </a>
+                                    </div>
+                                </div>
                             </td>
-                            <td style="font-weight: 600; color: var(--dark);">
-                                <a href="{{ route('mahasiswa.show', $mhs->id) }}">
-                                    {{ $mhs->nama }}
-                                </a>
+                            <td>
+                                <span class="npm-badge">{{ $mhs->npm }}</span>
                             </td>
                             <td>
                                 <span class="pill-badge prodi">{{ $mhs->prodi }}</span>
@@ -93,17 +106,8 @@
                             <td>
                                 <span class="pill-badge angkatan">{{ $mhs->angkatan }}</span>
                             </td>
-                            <td>
-                                <span class="pill-badge masked" title="Disamarkan ke tanggal 1 sesuai arahan tugas (tanggal asli tersimpan aman)">
-                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                    {{ $mhs->tanggal_lahir_masked }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="pill-badge secure" title="Nama ibu kandung dienkripsi menggunakan Laravel AES-256">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                    Nama Ibu Terenkripsi
-                                </span>
+                            <td style="color: var(--gray-text-sub); font-size: 0.88rem;">
+                                {{ $mhs->tanggal_lahir_masked }}
                             </td>
                             <td style="text-align: right;">
                                 <div style="display: inline-flex; gap: 6px;">
@@ -127,13 +131,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" style="text-align: center; color: var(--gray-text-sub); padding: 3rem 1rem;">
-                                <div style="font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-bottom: 6px;">Tidak ada mahasiswa ditemukan</div>
+                            <td colspan="7" style="text-align: center; color: var(--gray-text-sub); padding: 3rem 1rem;">
+                                <div style="font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-bottom: 6px;">Data tidak ditemukan</div>
                                 <p style="font-size: 0.9rem;">
                                     @if(request('search') || request('prodi'))
-                                        Coba ubah kata kunci pencarian atau reset filter.
+                                        Coba sesuaikan kata kunci pencarian atau reset filter.
                                     @else
-                                        Silakan tambahkan data mahasiswa baru melalui tombol di atas atau jalankan seeder.
+                                        Belum ada data mahasiswa yang tersimpan.
                                     @endif
                                 </p>
                             </td>

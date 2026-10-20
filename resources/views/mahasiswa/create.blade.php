@@ -118,9 +118,7 @@
                                 value="{{ old('tanggal_lahir') }}"
                                 required
                             >
-                            <div class="form-hint">
-                                <strong>Ketentuan Privasi:</strong> Tanggal asli disimpan di database, namun saat ditampilkan di layar akan disamarkan menjadi tanggal 1.
-                            </div>
+                            <div class="form-hint">Tanggal lahir mahasiswa sesuai dokumen kependudukan.</div>
                             @error('tanggal_lahir')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
@@ -136,13 +134,11 @@
                                 id="nama_ibu" 
                                 name="nama_ibu" 
                                 class="input-control" 
-                                placeholder="Nama ibu untuk verifikasi data" 
+                                placeholder="Nama ibu kandung" 
                                 value="{{ old('nama_ibu') }}"
                                 required
                             >
-                            <div class="form-hint">
-                                <strong>Enkripsi Otomatis:</strong> Data ini akan langsung dienkripsi (AES-256) dan tidak dipublikasikan ke API luar.
-                            </div>
+                            <div class="form-hint">Data keluarga disimpan secara aman dan terenkripsi.</div>
                             @error('nama_ibu')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
@@ -160,31 +156,31 @@
             </div>
         </div>
 
-        <!-- Panel Informasi Perlindungan Data -->
+        <!-- Panel Petunjuk Pengisian -->
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title" style="font-size: 1rem;">Perlindungan Privasi</div>
+                    <div class="card-title" style="font-size: 1rem;">Panduan Pengisian</div>
                 </div>
                 <div class="card-body" style="font-size: 0.88rem; line-height: 1.6;">
                     <div style="margin-bottom: 1rem;">
-                        <strong style="color: var(--primary);">1. Enkripsi Nama Ibu</strong>
+                        <strong style="color: var(--dark);">1. Nomor Pokok Mahasiswa</strong>
                         <p style="color: var(--gray-text-sub); margin-top: 4px;">
-                            Nama ibu dienkripsi sebelum disimpan ke PostgreSQL menggunakan <code>APP_KEY</code> Laravel (AES-256-CBC). Di database tidak berbentuk teks biasa.
+                            Pastikan NPM sesuai dengan kartu identitas mahasiswa resmi dan belum terdaftar sebelumnya.
                         </p>
                     </div>
 
                     <div style="margin-bottom: 1rem;">
-                        <strong style="color: var(--warning-text);">2. Penyamaran Tanggal Lahir</strong>
+                        <strong style="color: var(--dark);">2. Program Studi & Angkatan</strong>
                         <p style="color: var(--gray-text-sub); margin-top: 4px;">
-                            Sesuai arahan dosen, pada antarmuka publik dan laporan, hari lahir disamarkan ke tanggal 1 (misal 15/03/2004 menjadi 01/03/2004).
+                            Pilih program studi dan tahun masuk akademik mahasiswa yang bersangkutan.
                         </p>
                     </div>
 
                     <div>
-                        <strong style="color: var(--success-text);">3. Minimalisasi Data API</strong>
+                        <strong style="color: var(--dark);">3. Keamanan Data</strong>
                         <p style="color: var(--gray-text-sub); margin-top: 4px;">
-                            REST API untuk Sistem B hanya menyediakan NPM, Nama, dan Prodi. Data pribadi tetap aman.
+                            Data keluarga disimpan secara aman dengan proteksi enkripsi pada pangkalan data terpusat.
                         </p>
                     </div>
                 </div>
